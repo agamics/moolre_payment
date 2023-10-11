@@ -39,7 +39,7 @@ public static get hostURL(): string {
 
 If you would like to contribute to the app, please contact us.
 
-PR's with any new prebuild widgets or sets are highly appreciated.
+
 
 # Support
 
