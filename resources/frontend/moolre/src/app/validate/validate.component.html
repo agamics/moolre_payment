@@ -1,0 +1,201 @@
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+  <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+    <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+
+      <div *ngIf="stage == 1" class="max-w-md mx-auto">
+        <div class="flex items-center space-x-5">
+          <div
+            class="h-14 w-14 bg-yellow-400 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">
+            <img [src]="logo" width="35" alt="logo">
+          </div>
+          <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
+            <h2 class="leading-relaxed">Moolre Payments</h2>
+            <p class="text-sm text-gray-500 font-normal leading-relaxed">Fill this form to make payment.</p>
+          </div>
+        </div>
+        <form (ngSubmit)="verifyMobile()">
+          <div class="divide-y divide-gray-200">
+            <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+              <div class="flex flex-col">
+                <div class="relative focus-within:text-gray-600 text-gray-400">
+                  <input type="text"
+                    class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    placeholder="Enter Mobile Number" [(ngModel)]="myNumber" maxlength="10" name="myNumber">
+                  <div class="absolute left-3 top-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-mobile"
+                      width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z"></path>
+                      <path d="M11 4h2"></path>
+                      <path d="M12 17v.01"></path>
+                    </svg>
+                  </div>
+                </div>
+                <span *ngIf="errors.myNumber"
+                  class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                  Mobile Number Required!
+                </span>
+              </div>
+              <div class="flex flex-col">
+                <div class="relative focus-within:text-gray-600 text-gray-400">
+                  <select
+                    class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    required="required" [(ngModel)]="myProvider" name="myProvider">
+                    <option id="null" value="null" disabled>Seleted Provider</option>
+                    <option id="mtn" value="mtn">MTN</option>
+                    <option id="vodafone" value="vodafone">Vodafone</option>
+                    <option id="airteltigo" value="airteltigo">AirteltiGO</option>
+                  </select>
+                  <div class="absolute left-3 top-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-antenna-bars-5"
+                      width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M6 18l0 -3"></path>
+                      <path d="M10 18l0 -6"></path>
+                      <path d="M14 18l0 -9"></path>
+                      <path d="M18 18l0 -12"></path>
+                    </svg>
+                  </div>
+                </div>
+                <span *ngIf="errors.myProvider"
+                  class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                  Network Provider Required!
+                </span>
+                <span *ngIf="errors.wrongProvider"
+                  class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                  Select the correct network provider!
+                </span>
+              </div>
+            </div>
+            <div class="pt-4 flex items-center space-x-4">
+              <button
+                class="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg> Cancel
+              </button>
+              <button type="submit"
+                class="bg-yellow-400 flex justify-center items-center w-full text-dark px-4 py-3 rounded-md focus:outline-none">Proceed</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="stage == 2" class="max-w-md mx-auto">
+        <div class="flex items-center space-x-5">
+          <div
+            class="h-14 w-14 bg-yellow-400 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">
+            <img [src]="logo" width="35" alt="logo">
+          </div>
+          <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
+            <h2 class="leading-relaxed">Moolre Payments</h2>
+            <p class="text-sm text-gray-500 font-normal leading-relaxed">Enter the OTP code sent to your phone.</p>
+          </div>
+        </div>
+
+        <form (ngSubmit)="verifyOtp()">
+          <div class="divide-y divide-gray-200">
+            <div
+              class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 items-center justify-center">
+              <div class="flex flex-col">
+                <div class="relative focus-within:text-gray-600 text-gray-400">
+                  <input type="text"
+                    class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600 justify-center"
+                    placeholder="Enter OTP Code" [(ngModel)]="myOtp" name="myOtp" maxlength="6">
+                    <input type="hidden" [(ngModel)]="myTransId" name="myTransId">
+                    <input type="hidden" [(ngModel)]="otpNumber" name="otpNumber">
+                  <div class="absolute left-3 top-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="24"
+                      height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z"></path>
+                      <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"></path>
+                      <path d="M8 11v-4a4 4 0 1 1 8 0v4"></path>
+                    </svg>
+                  </div>
+                </div>
+                <span *ngIf="errors.invalidOpt"
+                  class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                  Wrong OTP entered!
+                </span>
+              </div>
+            </div>
+            <div class="pt-4 flex items-center space-x-4">
+              <button type="submit"
+                class="bg-yellow-400 flex justify-center items-center w-full text-dark px-4 py-3 rounded-md focus:outline-none">Verify</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+      <div *ngIf="stage == 3" class="max-w-md mx-auto">
+        <div class="flex items-center space-x-5">
+          <div
+            class="h-14 w-14 bg-yellow-400 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">
+            <img [src]="logo" width="35" alt="logo">
+          </div>
+          <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
+            <h2 class="leading-relaxed">Moolre Payments</h2>
+            <p class="text-sm text-gray-500 font-normal leading-relaxed">Approval payment promt sent to your phone.</p>
+          </div>
+        </div>
+        <div class="divide-y divide-gray-200">
+          <div
+            class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 items-center justify-center">
+            <div class="flex flex-col items-center">
+              <div class="relative text-gray-500">
+                {{myNumber}}
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 flex flex-col items-center space-x-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler animate-ping icon-tabler-device-mobile"
+              width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z"></path>
+              <path d="M11 4h2"></path>
+              <path d="M12 17v.01"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="stage == 4" class="max-w-md mx-auto">
+        <div class="flex items-center space-x-5">
+          <div
+            class="h-14 w-14 bg-yellow-400 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">
+            <img [src]="logo" width="35" alt="logo">
+          </div>
+          <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
+            <h2 class="leading-relaxed">Moolre Payments</h2>
+            <p class="text-sm text-gray-500 font-normal leading-relaxed">Payment approval was successful.</p>
+          </div>
+        </div>
+        <div class="divide-y divide-gray-200">
+          <div
+            class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 items-center justify-center">
+            <div class="flex flex-col items-center">
+              <div class="relative text-gray-500">
+                Payment Successful
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 flex flex-col items-center space-x-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checkbox" width="32" height="32" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M9 11l3 3l8 -8"></path>
+              <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"></path>
+           </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
