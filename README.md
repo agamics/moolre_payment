@@ -34,6 +34,13 @@ public static get hostURL(): string {
 ```
 
 
+Inside the resources\frontend\moolre folder, run the following command:
+```dart
+ng build 
+```
+
+Your application is ready for use.
+
 
 # Contribute
 
