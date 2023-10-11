@@ -6,7 +6,7 @@ A Moolre Payments Application.
 
 <img src="readme_pics/screenshot-01.png" />
 
-<img src="readme_pics/screenshot-03.png" />
+<img src="readme_pics/screenshot-02.png" />
 
 <img src="readme_pics/screenshot-03.png" />
 
