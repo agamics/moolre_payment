@@ -26,6 +26,13 @@ Run the following cmd command to migrate the database:
 php artisan migrate
 ```
 
+Update packages in the repo folder:
+
+Run the following cmd command to migrate the database:
+```dart
+composer update
+```
+
 Go into the resources\frontend\moolre\src\app\service\app-settings.ts angular file and change the HOST_URL to your domain name:
 ```dart
 public static get hostURL(): string {
@@ -33,6 +40,12 @@ public static get hostURL(): string {
 }
 ```
 
+Update angular and packages in 
+resources\frontend\moolre folder:
+
+```dart
+npm install
+```
 
 Inside the resources\frontend\moolre folder, run the following command:
 ```dart
